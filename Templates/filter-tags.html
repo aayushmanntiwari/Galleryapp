@@ -1,0 +1,6 @@
+{% for tag in tags %}
+    <li style="display:inline">
+        <input class="filter-checkbox"  data-filter="tag" value="{{tag.name}}" type="checkbox" />
+            {{tag.name}}
+    </li>
+{% endfor %}
