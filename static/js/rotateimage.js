@@ -46,11 +46,15 @@ $(document).on('click','.Anticlockwisebutton-filter',function(e){
                 'Content-type':'application/json',
                 'X-CSRFToken':csrftoken,
             },
+            beforeSend:function(){
+                $('#loader-two-'+String(model_id)).removeClass("hide");
+            },
             success:function(data) 
             {
                 $('.modal-body-'+String(model_id)).load(dataURL,function(){
                     $('#exampleModalshowimmagedata_'+String(model_id)).modal('hide');
                 });
+                $('#loader-two-'+String(model_id)).addClass("hide");
                 $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();            
             }
          });

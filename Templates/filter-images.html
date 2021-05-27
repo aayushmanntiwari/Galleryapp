@@ -23,6 +23,11 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
+                                        <div class="d-flex justify-content-center pt-2 hide" id="loader-two-{{image.id}}">
+                                            <div class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
                                         <div class="modal-body modal-body-{{image.id}}">
                                             Tags:
                                             {% for tag in image.tags.all %}
