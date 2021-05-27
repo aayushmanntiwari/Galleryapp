@@ -27,7 +27,8 @@ urlpatterns = [
     path('ajax/load-tags/',get_all_tags, name='get_all_tags'),
     #path('ajax/load-image-form/',laod_iamge_form, name='laod_iamge_form'),
     path('filter-data',filter_data,name='filter_data'),
-    path('ajax/all/filter/tags/',all_filter_tags,name="all_filter_tags")
+    path('ajax/all/filter/tags/',all_filter_tags,name="all_filter_tags"),
+    path('rotateimage/<str:model_id>/<str:item_id>/<str:direction_val>/',rotateimage,name="rotateimage"),
 ]
 
 

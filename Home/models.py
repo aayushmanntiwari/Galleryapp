@@ -5,6 +5,11 @@ from taggit.managers import TaggableManager
 
 
 # Create your models here.
+class Settings(models.Model):
+    cloud_name = models.CharField(max_length=225,blank=True,null=True)
+    api_key = models.CharField(max_length=225,blank=True,null=True)
+    api_secret = models.CharField(max_length=225,blank=True,null=True)
+
 class Images(models.Model):
     title = models.CharField(max_length=225,blank=True,null=True)
     image = CloudinaryField(
@@ -14,6 +19,8 @@ class Images(models.Model):
         transformation={"quality": "auto:eco"},
         format="jpg",
     )
+    direction = models.IntegerField(default=0,blank=True,null=True)
+    url = models.CharField(max_length=225,blank=True,null=True)
     slug = models.SlugField(blank=True,unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     tags = TaggableManager()
@@ -36,25 +43,5 @@ class Images(models.Model):
         return self.title
 
 
-'''class Tags(models.Model):
-    word = models.CharField(max_length=100)
-    slug = models.CharField(max_length=250)
-    created_at = models.DateTimeField(auto_now_add=True)
 
-    def _get_unique_slug(self):
-        slug = slugify(self.word)
-        unique_slug = slug
-        num = 1
-        while Tags.objects.filter(slug=unique_slug).exists():
-            unique_slug = '{}-{}'.format(slug, num)
-            num += 1
-        return unique_slug
- 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self._get_unique_slug()
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.word'''
     

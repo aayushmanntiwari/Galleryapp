@@ -1,0 +1,66 @@
+{% for image in images %}
+{% if image.title is not None %}
+<div class="col-md-4 col-6 p-2" id="items">
+            <div class="card">
+                    <img src="{{image.image.url}}" class="image-thumbail" style="width:100%">        
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary btn-sm m-2" data-toggle="modal" data-item-id={{image.id}} data-target="#exampleModalshowimmagedata{{image.id}}">
+                            view details 
+                        </button>
+                    </div>                           
+                <div class="modal fade" id="exampleModalshowimmagedata{{image.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">{{image.title}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                            </div>
+                            <div class="modal-body">                   
+                                Tags:
+                                {% for tag in image.tags.all %}
+                                <span class="align-middle">{{ tag.name }},</span>
+                                {% endfor %}
+                                <br></br>
+                                <input type="hidden" id="curr-item-id-{{image.id}}" class="current_item_obj" value="{{image.id}}" name="item-curr-id">
+                                <div class="container">
+                                    <p>Rotate Image</p>
+                                    <a class="clockwisebutton btn-primary p-2" id="{{image.id}}" data-item-id="{{image.id}}" data-clockwise-id="-90">Clockwise</a>
+                                    <a class="Anticlockwisebutton btn-primary p-2" id="{{image.id}}" data-item-id="{{image.id}}" data-clockwise-id="90">AntiClockwise</a>                            
+                                </div>                            
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                                                
+                    </div>
+                </div>
+            </div>
+</div>
+{% endif %}
+{% endfor %}
+
+
+<script>
+    $(document).ready(function(){
+    var items = $('#image-cards #items');
+    var numItems = items.length;
+    var perPage = 8;
+    items.slice(perPage).hide();
+    $('#pagination-container').pagination({
+        items: numItems, 
+        itemsOnPage:perPage,  
+        currentPage: 1,
+        prevText: "Prev", 
+        nextText: "Next", 
+        cssStyle: "light-theme", 
+        onPageClick :function(pageNumber){
+            var showFrom = perPage * (pageNumber - 1);
+            var showTo = showFrom + perPage;
+            items.hide().slice(showFrom,showTo).show();
+        }
+    });
+});
+</script>

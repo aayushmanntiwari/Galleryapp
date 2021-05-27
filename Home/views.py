@@ -1,7 +1,9 @@
 import io
+import cloudinary
 from io import StringIO
 from PIL import Image
 from django.http.response import HttpResponse, JsonResponse
+from PIL import Image as PilImage
 from django.shortcuts import render,redirect
 from .models import Images
 from taggit.models import Tag
@@ -14,6 +16,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from .serializers import TagsSerializers,ImagesSerializers
 from .forms import ImageFileUploadForm
 from django.core.files.base import ContentFile
+
 
 # Create your views here.
 @api_view(['GET','POST'])
@@ -97,18 +100,26 @@ def all_filter_tags(request):
 
 #request the id for the current item and read the file image and rotate the image and save it again
 @api_view(['GET'])
-def rotateimage(request,id): 
-    myModel = Images.objects.get(pk=id)
-    original_photo = StringIO.StringIO(myModel.file.read())
-    rotated_photo = StringIO.StringIO()
-    image = Image.open(original_photo)
-    image = image.rotate(-90) or image.rotate(90) #we get this value through post form 
-    image.save(rotated_photo, 'JPEG')
+def rotateimage(request,model_id=None,item_id=None,direction_val=None):
+    #this code is for if you are saving images file in  media folder of localhost
+    '''myModel = Images.objects.get(id=item_id)
+    im = PilImage.open(myModel.image)
+    rotated_image = im.rotate(direction_val)
+    rotated_image.save(myModel.image.file.name, overwrite=True)'''
 
-    myModel.file.save(image.file.path, ContentFile(rotated_photo.getvalue()))
-    myModel.save()
+    #this code is when you are saving images in cloud i.e cloudnary
+    image = Images.objects.get(id=item_id)
+    image.direction = direction_val
+    path = str(image.image.url).split('upload')
+    image.url = f"{path[0]}upload/a_{image.direction}{path[1]}"
+    image.save()
+    context = {
+        'image':image,
+    }
+    data = render_to_string('test.html',context=context)
+    return HttpResponse(data)
+   
 
-    return render(request, '...',{...})
     
 
 

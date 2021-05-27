@@ -1,0 +1,11 @@
+Tags:
+    {% for tag in image.tags.all %}
+        <span class="align-middle">{{ tag.name }},</span>
+    {% endfor %}
+    <br><br>
+<div class="container" id="item-{{image.id}}">
+    <img src="{{image.url}}" class="image-thumbail" style="width:100%"><br><br>
+    <p>Rotate Image</p>
+    <a class="clockwisebutton-filter btn-primary p-2 "  data-href="/rotateimage/modal-body-{{image.id}}/{{image.id}}/-90/" model-id="{{image.id}}" data-item-id="{{image.id}}" data-clockwise-id="-90">Clockwise</a>
+    <a class="Anticlockwisebutton-filter btn-primary p-2" data-href="/rotateimage/modal-body-{{image.id}}/{{image.id}}/90/" model-id="{{image.id}}" data-item-id="{{image.id}}" data-clockwise-id="90">AntiClockwise</a>
+</div>
