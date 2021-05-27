@@ -5,8 +5,7 @@ $(document).on('click','.clockwisebutton-filter',function(e){
     var dataURL = $(this).attr('data-href');
     $.ajax(
         {
-            type:"POST",
-            /*url: "/rotateimage/",*/
+            type:"GET",
             data:{
                 direction_val: direction_val,
                 id:id,
