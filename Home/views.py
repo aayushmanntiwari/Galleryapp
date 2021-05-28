@@ -1,8 +1,9 @@
 import io
 import cloudinary
+import requests
 from io import StringIO
-from PIL import Image
 from django.http.response import HttpResponse, JsonResponse
+import mimetypes
 from PIL import Image as PilImage
 from django.shortcuts import render,redirect
 from .models import Images
@@ -118,6 +119,8 @@ def rotateimage(request,model_id=None,item_id=None,direction_val=None):
     }
     data = render_to_string('test.html',context=context)
     return HttpResponse(data)
+
+
    
 
     

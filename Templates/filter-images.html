@@ -9,9 +9,20 @@
                                 <img src="{{image.image.url}}" class="image-thumbail" style="width:100%"><br><br>
                             {% endif %}
                             <div class="card-body">
-                                <button type="button" class="btn btn-primary btn-sm m-2" data-toggle="modal" data-item-id={{image.id}} data-target="#exampleModalshowimmagedata_{{image.id}}">
-                                    view details 
-                                </button>
+                                <div style="display: flex; justify-content: center;">
+                                    <div class="fixed">
+                                        <button type="button" class="btn btn-primary btn-md m-2" data-toggle="modal" data-item-id={{image.id}} data-target="#exampleModalshowimmagedata_{{image.id}}">
+                                            info  
+                                        </button>
+                                    </div>
+                                    <div class="fixed pt-3 pl-3">
+                                        {% if image.url is not None %}
+                                        <a   id="{{image.id}}" href="{{image.image_url_as_list}}" download><i class="fa fa-download fa-lg"></i></a>          
+                                        {% else %}
+                                            <a   id="{{image.id}}" href="{{image_image_url_as_list}}" download><i class="fa fa-download fa-lg"></i></a>
+                                        {% endif %}
+                                    </div>                                    
+                                </div>
                             </div>
                             <!-- Model to show single image details -->
                             <div class="modal fade" id="exampleModalshowimmagedata_{{image.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
