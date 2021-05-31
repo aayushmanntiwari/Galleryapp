@@ -200,6 +200,10 @@
     <script type="text/javascript" src="{% static 'js/filterimagebasedontags.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/laodimages.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/rotateimage.js' %}"></script>
-    <script>buildList();</script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            buildList();
+        });
+    </script>
   </body>
 </html>

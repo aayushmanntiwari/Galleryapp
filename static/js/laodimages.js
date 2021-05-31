@@ -1,5 +1,3 @@
-
-
 function buildList(){
     var wrapper = document.getElementById('image-cards')
     if (wrapper!= null){
@@ -88,9 +86,10 @@ function buildList(){
                         wrapper.innerHTML += item
                     }
                 }
+                return;
             }
         });
 
     }
 
-}
+};
