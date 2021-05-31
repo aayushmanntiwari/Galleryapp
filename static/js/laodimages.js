@@ -1,7 +1,8 @@
-function buildList(){
+function buildList(tags){
     var wrapper = document.getElementById('image-cards')
+    console.log(tags)
     if (wrapper!= null){
-        var url = '/ajax/load-images/'
+        var url = '/ajax/load-images/' + tags
         fetch(url)
 		.then((resp) => resp.json())
 		.then(function(data){

@@ -29,7 +29,7 @@ urlpatterns = [
     path('filter-data',filter_data,name='filter_data'),
     path('ajax/all/filter/tags/',all_filter_tags,name="all_filter_tags"),
     path('rotateimage/<str:model_id>/<str:item_id>/<str:direction_val>/',rotateimage,name="rotateimage"),
-    path('ajax/load-images/',load_images,name="load_images")
+    path('ajax/load-images/<str:tags>/',load_images,name="load_images")
     
 ]
 

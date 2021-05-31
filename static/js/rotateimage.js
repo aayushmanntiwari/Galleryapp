@@ -3,6 +3,7 @@ $(document).on('click','.clockwisebutton-filter',function(e){
     var id =  $(this).attr("data-item-id");
     var model_id =  $(this).attr("model-id");
     var dataURL = $(this).attr('data-href');
+    var tags = $(this).attr('data-filter-tags');
     $.ajax(
         {
             type:"GET",
@@ -23,7 +24,7 @@ $(document).on('click','.clockwisebutton-filter',function(e){
             {
                 $('.modal-body-'+String(model_id)).load(dataURL,function(){
                     $('#exampleModalshowimmagedata_'+String(model_id)).modal('hide');
-                    buildList();
+                    buildList(tags);
                 });
                 $('#loader-two-'+String(model_id)).addClass("hide");
                 $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();
@@ -38,6 +39,7 @@ $(document).on('click','.Anticlockwisebutton-filter',function(e){
     var id =  $(this).attr("data-item-id");
     var model_id =  $(this).attr("model-id");
     var dataURL = $(this).attr('data-href');
+    var tags = $(this).attr('data-filter-tags');
     $.ajax(
         {
             type:"GET",
@@ -57,7 +59,7 @@ $(document).on('click','.Anticlockwisebutton-filter',function(e){
             {
                 $('.modal-body-'+String(model_id)).load(dataURL,function(){
                     $('#exampleModalshowimmagedata_'+String(model_id)).modal('hide');
-                    buildList();
+                    buildList(tags);
                 });
                 $('#loader-two-'+String(model_id)).addClass("hide");
                 $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();           

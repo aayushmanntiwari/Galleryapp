@@ -1,6 +1,7 @@
 import io
 import cloudinary
 import requests
+import ast
 from io import StringIO
 from django.http.response import HttpResponse, JsonResponse
 import mimetypes
@@ -75,10 +76,12 @@ def laod_iamge_form(request):
 def filter_data(request):
     tags = request.GET.getlist('tag[]')
     tags_obj = Tag.objects.all().distinct()
+    print(tags)
     if tags!=[]:
         images = Images.objects.filter(tags__name__in=tags).distinct()
     else:
         images = Images.objects.all()
+    print(images)
     context = {
         'images':images,
         'tags_obj':tags_obj,
@@ -122,9 +125,12 @@ def rotateimage(request,model_id=None,item_id=None,direction_val=None):
     return HttpResponse(data)
 
 @api_view(['GET'])
-def load_images(request):
+def load_images(request,tags=None):
+    if tags!= 'undefined':
+        images = Images.objects.filter(tags__name__in=ast.literal_eval(tags))
+    else:
+        images = Images.objects.all()
     data = {}
-    images = Images.objects.all()
     for image in images:
         data[image.id] = { 
         'id':image.id,
