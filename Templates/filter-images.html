@@ -3,8 +3,8 @@
     {% if image.title is not None%}
     <div class="col-md-4 col-6 p-2" id="items">
         <div class="card">
-                            {% if image.url is not None %}
-                                <img src="{{image.url}}" class="image-thumbail" style="width:100%"><br><br>
+                            {% if image.image_url_as_list != "" %}
+                                <img src="{{image.image_url_as_list}}" class="image-thumbail" style="width:100%"><br><br>
                             {% else  %}
                                 <img src="{{image.image.url}}" class="image-thumbail" style="width:100%"><br><br>
                             {% endif %}
@@ -16,10 +16,10 @@
                                         </button>
                                     </div>
                                     <div class="fixed pt-3 pl-3">
-                                        {% if image.url is not None %}
+                                        {% if image.image_url_as_list != "" %}
                                         <a   id="{{image.id}}" href="{{image.image_url_as_list}}" download><i class="fa fa-download fa-lg"></i></a>          
                                         {% else %}
-                                            <a   id="{{image.id}}" href="{{image_image_url_as_list}}" download><i class="fa fa-download fa-lg"></i></a>
+                                            <a   id="{{image.id}}" href="{{image.image_image_url_as_list}}" download><i class="fa fa-download fa-lg"></i></a>
                                         {% endif %}
                                     </div>                                    
                                 </div>
@@ -46,11 +46,11 @@
                                             {% endfor %}
                                             <br><br>
                                             <div class="container" id="item-{{image.id}}">
-                                                    {% if image.url is not None %}
-                                                        <img src="{{image.url}}" class="image-thumbail" style="width:100%"><br><br>
-                                                    {% else  %}
-                                                        <img src="{{image.image.url}}" class="image-thumbail" style="width:100%"><br><br>
-                                                    {% endif %}
+                                                {% if image.image_url_as_list != "" %}
+                                                    <img src="{{image.image_url_as_list}}" class="image-thumbail" style="width:100%"><br><br>
+                                                {% else  %}
+                                                    <img src="{{image.image.url}}" class="image-thumbail" style="width:100%"><br><br>
+                                                {% endif %}
                                                     <p>Rotate Image</p>
                                                     <a class="clockwisebutton-filter btn-primary p-2 "  data-href="/rotateimage/modal-body-{{image.id}}/{{image.id}}/-90/" model-id="{{image.id}}" data-item-id="{{image.id}}" data-clockwise-id="-90">Clockwise</a>
                                                     <a class="Anticlockwisebutton-filter btn-primary p-2" data-href="/rotateimage/modal-body-{{image.id}}/{{image.id}}/90/" model-id="{{image.id}}" data-item-id="{{image.id}}" data-clockwise-id="90">AntiClockwise</a>
@@ -68,7 +68,7 @@
     {% endif %}
 {% endfor %}
 
-<script>
+<!--<script>
     $(document).ready(function(){
         var items = $('#image-cards #items');
         console.log(items)
@@ -91,7 +91,7 @@
             }
         });
     });
-</script>
+</script>-->
 
 
    

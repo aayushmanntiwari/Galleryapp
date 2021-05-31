@@ -5,6 +5,7 @@ from io import StringIO
 from django.http.response import HttpResponse, JsonResponse
 import mimetypes
 from PIL import Image as PilImage
+from django.core import serializers
 from django.shortcuts import render,redirect
 from .models import Images
 from taggit.models import Tag
@@ -112,13 +113,34 @@ def rotateimage(request,model_id=None,item_id=None,direction_val=None):
     image = Images.objects.get(id=item_id)
     image.direction = direction_val
     path = str(image.image.url).split('upload')
-    image.url = f"{path[0]}upload/a_{image.direction}{path[1]}"
+    image.url = f"{path[0]}upload/a_{image.direction}{path[1]}" 
     image.save()
     context = {
         'image':image,
     }
     data = render_to_string('test.html',context=context)
     return HttpResponse(data)
+
+@api_view(['GET'])
+def load_images(request):
+    data = {}
+    images = Images.objects.all()
+    for image in images:
+        data[image.id] = { 
+        'id':image.id,
+        'title':image.title,
+        'image':image.image.url,
+        'direction':image.direction,
+        'url':image.url,
+        'slug':image.slug,
+        'created_at':image.created_at,
+        'tags': image.tags.all().values(),
+        'image_url_as_list':image.image_url_as_list(),
+        'image_image_url_as_list':image.image_image_url_as_list()
+    }
+    return Response(data.values())
+
+
 
 
    

@@ -45,12 +45,19 @@ class Images(models.Model):
     def image_url_as_list(self):
         if self.url is not None:
             path = self.url.split('upload')
-            return f"{path[0]}upload/fl_attachment:{self.title}{path[1]}" 
+            return f"{path[0]}upload/fl_attachment:{self.title}{path[1]}"
+        else:
+            return '' 
     
     def image_image_url_as_list(self):
         if self.image is not None:
-            path = self.image.url.split('upload')
-            return f"{path[0]}upload/fl_attachment:{self.title}{path[1]}" 
+            if 'upload' in self.image.url:
+                path = self.image.url.split('upload')
+                return f"{path[0]}upload/fl_attachment:{self.title}{path[1]}"
+            else:
+                return ''
+        else:
+            return '' 
 
 
 

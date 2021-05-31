@@ -5,7 +5,7 @@ from taggit.models import Tag
 class ImagesSerializers(serializers.ModelSerializer):
     class Meta:
         model = Images
-        fields = ['title','image','tags']
+        fields = ['id','title','image','url']
 
 
 class TagsSerializers(serializers.ModelSerializer):

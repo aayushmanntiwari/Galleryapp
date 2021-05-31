@@ -26,6 +26,7 @@ $(document).on('click','.clockwisebutton-filter',function(e){
                 });
                 $('#loader-two-'+String(model_id)).addClass("hide");
                 $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();
+                buildList();  
             }
          });
 });
@@ -58,7 +59,8 @@ $(document).on('click','.Anticlockwisebutton-filter',function(e){
                     $('#exampleModalshowimmagedata_'+String(model_id)).modal('hide');
                 });
                 $('#loader-two-'+String(model_id)).addClass("hide");
-                $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();            
+                $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();
+                buildList();           
             }
          });
 });
